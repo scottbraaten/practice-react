@@ -12,22 +12,27 @@ function Expenses(props) {
         setYear(year);
     }
     return (
-        <div>
-            {/* retrieve year from ExpensesFilter */}
+        <div className="expenses">
             <ExpensesFilter selected={year} captureYear={limitExpenses} />
-            <Card className="expenses">
-
-                {/* dynamically return ExpenseItem components with map */}
+            <Card>
                 {props.expenses.map(function(a) {
-                    
-                    /* return an ExpenseItem for all expenses */
-                    if (year == 'All')
-                    return (<ExpenseItem expenseAmount={a.amount} expenseDate={a.date} expenseTitle={a.title}/>);
-                    
-                    /* only return an ExpenseItem if provided date consists of
-                    the same year as the year retrieved from ExpensesFilter */
-                    else if (a.date.getFullYear() == year)
-                    return (<ExpenseItem expenseAmount={a.amount} expenseDate={a.date} expenseTitle={a.title}/>);
+                    if (year === 'All') return (
+                        <ExpenseItem
+                            key={a.id}
+                            expenseAmount={a.amount}
+                            expenseDate={a.date}
+                            expenseTitle={a.title}
+                        />
+                    );
+                    else if (a.date.getFullYear() === year) return (
+                        <ExpenseItem
+                            key={a.id}
+                            expenseAmount={a.amount}
+                            expenseDate={a.date} 
+                            expenseTitle={a.title}
+                        />
+                    );
+                    return null;
                 })}
             </Card>
         </div>

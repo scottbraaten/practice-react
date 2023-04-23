@@ -31,10 +31,9 @@ function App() {
   const [expenses, setExpenses] = useState(DUMMY_DATA);
 
   const onAddNewExpense = (expense) => {
-    setExpenses([
-      ...expenses,
-      expense
-    ]);
+    setExpenses(prevExpenses => {
+      return [expense, ...prevExpenses];
+    });
   }
 
   return (
